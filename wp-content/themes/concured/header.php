@@ -119,7 +119,7 @@
 		</div>
 	</div>
 	<div class="wrapper">
-		<header class="header container"><a class="header-logo" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/general/logo.svg" alt="Concured Logo"></a>
+		<header class="header container"><a class="header-logo" href="<?= get_home_url(); ?>"><img src="<?php bloginfo('template_url'); ?>/assets/img/general/logo.svg" alt="Concured Logo"></a>
 			<button class="header-menu-btn">
 				<div class="header-menu-btn-cross"><span></span></div>
 			</button>

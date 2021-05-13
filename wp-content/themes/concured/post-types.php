@@ -2,21 +2,21 @@
 
 add_action( 'init', 'register_post_types' );
 function register_post_types(){
-	register_post_type( 'block', [
+	register_post_type( 'testimonial', [
 		'label'  => null,
 		'labels' => [
-			'name'               => 'Blocks', // основное название для типа записи
-			'singular_name'      => 'Block', // название для одной записи этого типа
-			'add_new'            => 'Add block', // для добавления новой записи
-			'add_new_item'       => 'Add block', // заголовка у вновь создаваемой записи в админ-панели.
-			'edit_item'          => 'Edit block', // для редактирования типа записи
-			'new_item'           => 'New block', // текст новой записи
-			'view_item'          => 'View block', // для просмотра записи этого типа.
-			'search_items'       => 'Search block', // для поиска по этим типам записи
+			'name'               => 'Testimonials', // основное название для типа записи
+			'singular_name'      => 'Testimonial', // название для одной записи этого типа
+			'add_new'            => 'Add content', // для добавления новой записи
+			'add_new_item'       => 'Add content', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Edit content', // для редактирования типа записи
+			'new_item'           => 'New content', // текст новой записи
+			'view_item'          => 'View content', // для просмотра записи этого типа.
+			'search_items'       => 'Search content', // для поиска по этим типам записи
 			'not_found'          => 'Not found', // если в результате поиска ничего не было найдено
 			'not_found_in_trash' => 'Not found in trash', // если не было найдено в корзине
 			'parent_item_colon'  => '', // для родителей (у древовидных типов)
-			'menu_name'          => 'Blocks', // название меню
+			'menu_name'          => 'Testimonials Block', // название меню
 		],
 		'description'         => '',
 		'public'              => true,

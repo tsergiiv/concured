@@ -177,51 +177,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="comment container">
-				<h1 class="comment-heading">Client Testimonials</h1>
-				<div class="comment-wrap">
-					<div class="comment-elem">
-						<div class="comment-company">M&C Saatchi PR</div>
-						<p class="comment-text">When marketers think about how AI can be used to benefit them, they are thinking about Concured.</p>
-						<div class="comment-person"> <img class="comment-person-photo" src="<?php bloginfo('template_url'); ?>/assets/img/content/comment/comment-img-1.jpg" alt="">
-							<div class="comment-person-info">
-								<div class="comment-person-name">Chris Brown</div>
-								<div class="comment-person-position">Global Head of Strategy</div>
-							</div>
-						</div><a class="read-more comment-read-more" href="">Read case study </a>
-					</div>
-					<div class="comment-elem">
-						<div class="comment-company">IDG UK </div>
-						<p class="comment-text">Concured has helped add an exciting new revenue line to IDG. Through them we've been able to increase the quality and depth of our customer service which,</p>
-						<div class="comment-person"> <img class="comment-person-photo" src="<?php bloginfo('template_url'); ?>/assets/img/content/comment/comment-img-2.jpg" alt="">
-							<div class="comment-person-info">
-								<div class="comment-person-name">Jim McGinty</div>
-								<div class="comment-person-position">Managing Director IDG UK</div>
-							</div>
-						</div><a class="read-more comment-read-more" href="">Read case study </a>
-					</div>
-					<div class="comment-elem">
-						<div class="comment-company">CTI  </div>
-						<p class="comment-text">Any content marketing teams looking to jump-start, differentiate and accelerate insight-driven content personalization should consider Concured.</p>
-						<div class="comment-person"> <img class="comment-person-photo" src="<?php bloginfo('template_url'); ?>/assets/img/content/comment/comment-img-3.jpg" alt="">
-							<div class="comment-person-info">
-								<div class="comment-person-name">Harj Murria</div>
-								<div class="comment-person-position">Head of International Thought Leadership Marketing</div>
-							</div>
-						</div><a class="read-more comment-read-more" href="">Read case study </a>
-					</div>
-					<div class="comment-elem">
-						<div class="comment-company">Gartner </div>
-						<p class="comment-text">Any content marketing teams looking to jump-start, differentiate and accelerate insight-driven content personalization should consider Concured.</p>
-						<div class="comment-person"> <img class="comment-person-photo" src="<?php bloginfo('template_url'); ?>/assets/img/content/comment/comment-img-4.jpg" alt="">
-							<div class="comment-person-info">
-								<div class="comment-person-name">Marc Brown</div>
-								<div class="comment-person-position">Senior Director </div>
-							</div>
-						</div><a class="read-more comment-read-more" href="">Read case study </a>
-					</div>
-				</div>
-			</section>
+			<?= get_template_part('blocks/block-testimonials') ?>
 			<section class="info-wrap info-wrap-def info-wrap-about"><img class="info-wrap-bg info-wrap-bg-about" src="<?php bloginfo('template_url'); ?>/assets/img/content/about/about-bg.svg" alt="">
 				<div class="info-wrap-img-elem">
 					<picture class="info-wrap-img">
@@ -245,7 +201,7 @@
 								Offering an unrivalled view of your rivalry so you can outsmart rather
 								than outspend your competitors
 							</li>
-						</ul><a class="read-more read-more-list" href="">Read more</a>
+						</ul><a class="read-more read-more-list" href="<?= get_home_url(); ?>/about">Read more</a>
 					</div>
 				</div>
 			</section>
