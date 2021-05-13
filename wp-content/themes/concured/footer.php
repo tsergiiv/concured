@@ -1,221 +1,52 @@
-
-	<footer>
-		<div class="container-main">
-			<div class="container-inner">
-				<?php
-					$posts = get_posts( array(
-							'post_type' => 'footer_block',
-					) );
-
-					foreach( $posts as $post ) {
-						setup_postdata($post);
-						?>
-
-						<div class="title flex flex-column">
-							<h3 class="relative mx-auto">
-								<?= the_field('title') ?>
-							</h3>
-						</div>
-						<div class="footer-description">
-							<?= the_field('text') ?>
-						</div>
-						<nav class="footer-botrow flex align-center">
-							<?php
-								$menuParameters = [
-										'theme_location'  => '',
-										'menu'            => 'bottom-left',
-										'container'       => false,
-										'container_class' => '',
-										'container_id'    => '',
-										'menu_class'      => '',
-										'menu_id'         => '',
-										'echo'            => false,
-										'fallback_cb'     => 'wp_page_menu',
-										'before'          => '',
-										'after'           => '',
-										'link_before'     => '',
-										'link_after'      => '',
-										'items_wrap'      => '%3$s',
-										'depth'           => 0,
-										'walker'          => '',
-								];
-
-								echo strip_tags(wp_nav_menu( $menuParameters ), '<a>' );
-							?>
-							<div class="logo ml-auto">
-								<img src="<?php bloginfo('template_url'); ?>/assets/img/logo-footer.svg" alt="Logo">
-							</div>
-							<?php
-								$menuParameters = [
-										'theme_location'  => '',
-										'menu'            => 'bottom-right',
-										'container'       => false,
-										'container_class' => '',
-										'container_id'    => '',
-										'menu_class'      => '',
-										'menu_id'         => '',
-										'echo'            => false,
-										'fallback_cb'     => 'wp_page_menu',
-										'before'          => '',
-										'after'           => '',
-										'link_before'     => '',
-										'link_after'      => '',
-										'items_wrap'      => '%3$s',
-										'depth'           => 0,
-										'walker'          => '',
-								];
-
-								echo strip_tags(wp_nav_menu( $menuParameters ), '<a>' );
-							?>
-						</nav>
-						<div class="menu">Menu</div>
-						<nav class="menu-nav">
-							<?php
-								$menuParameters = [
-										'theme_location'  => 'top',
-										'menu'            => '',
-										'container'       => false,
-										'container_class' => '',
-										'container_id'    => '',
-										'menu_class'      => '',
-										'menu_id'         => '',
-										'echo'            => false,
-										'fallback_cb'     => 'wp_page_menu',
-										'before'          => '',
-										'after'           => '',
-										'link_before'     => '',
-										'link_after'      => '',
-										'items_wrap'      => '%3$s',
-										'depth'           => 0,
-										'walker'          => '',
-								];
-
-								echo strip_tags(wp_nav_menu( $menuParameters ), '<a>' );
-							?>
-						</nav>
-						<div class="copyright">
-							<?= the_field('copyright') ?>
-						</div>
-
-						<?php
-					}
-
-					wp_reset_postdata();
-				?>
+		<div class="cookies">
+			<div class="container cookies-wrap">
+				<div class="cookies-text">
+					We use cookies to offer you a better browsing experience.
+					Cookies enhance site navigation, analyze site usage,
+					and assist in our marketing efforts. To understand more
+					about how we use cookies or to change your cookie preferences,
+					click on “Cookie Settings”. By clicking “Accept All Cookies,”
+					you agree to the storing of cookies on your device.
+				</div>
+				<div class="cookies-buttons"><a class="btn-s cookies-setting" href="">Cookies Settings</a>
+					<button class="btn-s btn-coral cookies-accept">Accept All Cookies</button>
+				</div>
 			</div>
 		</div>
-	</footer>
-
-	<?php
-		$posts = get_posts( array(
-				'post_type' => 'table_block',
-		) );
-
-		foreach( $posts as $post ) {
-			setup_postdata($post);
-			?>
-
-			<div id="modal-snowflake" class="modal m-auto">
-				<div class="modal-dialog m-auto">
-					<a href="#" class="button-close modal-close"><img src="assets/img/icons/close.svg" alt=""></a>
-					<h4 class="modal-title"><?= the_field('modal_title_1') ?></h4>
-					<div class="modal-body">
-						<ul>
-							<?= the_field('modal_text_1') ?>
-						</ul>
+		<footer class="footer container">
+			<div class="footer-t">
+				<div class="footer-info"><a class="footer-logo" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/general/logo.svg" alt=""></a>
+					<div class="footer-info-desc">Content Auditing, Strategy and Personalization for Enterprise</div>
+					<button class="btn-s btn-blue footer-info-btn modal-o-btn" data-modal-btn="book-modal">See Demo</button>
+				</div>
+				<div class="footer-nav">
+					<div class="footer-nav-list"><span class="footer-nav-title">Platform</span><a class="footer-nav-link" href="">Library</a><a class="footer-nav-link" href="">Overview</a><a class="footer-nav-link" href="">Analytics</a><a class="footer-nav-link" href="">Pricing</a></div>
+					<div class="footer-nav-list"><span class="footer-nav-title">About US</span><a class="footer-nav-link" href="">Services</a><a class="footer-nav-link" href="">About us</a><a class="footer-nav-link" href="">Clients</a><a class="footer-nav-link" href="">Contact</a></div>
+					<div class="footer-nav-list"><span class="footer-nav-title">Resourses</span><a class="footer-nav-link" href="">Blog</a><a class="footer-nav-link" href="">Academy</a></div>
+				</div>
+			</div>
+			<div class="footer-b">
+				<div class="footer-b-elem"><span class="footer-copyright">© 2020 All Rights Reserved</span></div>
+				<div class="footer-b-elem"><a class="footer-link" href="">Privacy Policy</a><a class="footer-link" href="">Terms of use</a></div>
+				<div class="footer-b-elem">
+					<div class="footer-social">
+						<a class="footer-social-link" href="">
+							<img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/inst-logo.svg" alt="Instagram">
+						</a>
+						<a class="footer-social-link" href="">
+							<img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/fb-logo.svg" alt="Facebook">
+						</a>
+						<a class="footer-social-link" href="">
+							<img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/yt-logo.svg" alt="YouTube">
+						</a>
+						<a class="footer-social-link" href="">
+							<img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/in-logo.svg" alt="Linkedin">
+						</a>
 					</div>
 				</div>
 			</div>
-			<div id="modal-sumo" class="modal m-auto">
-				<div class="modal-dialog m-auto">
-					<a href="#" class="button-close modal-close"><img src="assets/img/icons/close.svg" alt=""></a>
-					<h4 class="modal-title"><?= the_field('modal_title_2') ?></h4>
-					<div class="modal-body">
-						<ul>
-							<?= the_field('modal_text_2') ?>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div id="modal-precisely" class="modal m-auto">
-				<div class="modal-dialog m-auto">
-					<a href="#" class="button-close modal-close"><img src="assets/img/icons/close.svg" alt=""></a>
-					<h4 class="modal-title"><?= the_field('modal_title_3') ?></h4>
-					<div class="modal-body">
-						<ul>
-							<?= the_field('modal_text_3') ?>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div id="modal-axway" class="modal m-auto">
-				<div class="modal-dialog m-auto">
-					<a href="#" class="button-close modal-close"><img src="assets/img/icons/close.svg" alt=""></a>
-					<h4 class="modal-title"><?= the_field('modal_title_4') ?></h4>
-					<div class="modal-body">
-						<ul>
-							<?= the_field('modal_text_4') ?>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div id="modal-blackline" class="modal m-auto">
-				<div class="modal-dialog m-auto">
-					<a href="#" class="button-close modal-close"><img src="assets/img/icons/close.svg" alt=""></a>
-					<h4 class="modal-title"><?= the_field('modal_title_5') ?></h4>
-					<div class="modal-body">
-						<ul>
-							<?= the_field('modal_text_5') ?>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-			<?php
-		}
-
-		wp_reset_postdata();
-	?>
-
-	<div id="modal-contacts" class="modal m-auto">
-		<div class="modal-dialog m-auto">
-			<a href="#" class="button-close modal-close"><img src="assets/img/icons/close.svg" alt=""></a>
-			<h4 class="modal-title">Let's Connect!</h4>
-			<div class="modal-body">
-				<form>
-					<input type="text" name="action" value="<?= admin_url('admin-ajax.php?action=send_mail') ?>" hidden>
-					<div class="form-group">
-						<label for="name">Name</label>
-						<input id="name" type="text" name="name" placeholder="Enter your name">
-					</div>
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input id="email" type="email" name="email" placeholder="Enter your email">
-					</div>
-					<div class="form-group">
-						<label for="link">Url</label>
-						<input id="link" type="text" name="link" placeholder="Company URL">
-					</div>
-					<div class="form-group">
-						<label for="message">Message</label>
-						<textarea id="message" name="message" placeholder="Tell us how we can help"></textarea>
-					</div>
-					<button type="submit" id="submit-btn" disabled class="button flex align-center justify-center mx-auto">Send</button>
-				</form>
-			</div>
-		</div>
+		</footer>
 	</div>
-	<div class="cookies">
-		<div class="cookies-text">
-			We use cookies to offer you a better browsing experience.
-			Cookies enhance site navigation, analyze site usage, and assist in our marketing efforts.
-			To understand more about how we use cookies or to change your cookie preferences, click on “Cookie Settings”.
-			By clicking “Accept All Cookies,” you agree to the storing of cookies on your device.
-		</div>
-		<button type="button" class="button button-settings pointer">Cookie Settings</button>
-		<button type="button" class="button button-accept pointer">Accept All Cookies</button>
-	</div>
-	<div class="scroll-top"><img src="<?php bloginfo('template_url'); ?>/assets/img/icons/owl-right.svg" alt=""></div>
 
 	<script type="text/javascript">
         let templateUrl = '<?= get_bloginfo("template_url"); ?>';

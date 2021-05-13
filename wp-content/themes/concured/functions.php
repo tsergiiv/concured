@@ -13,10 +13,25 @@ function enqueue_styles()
 
 function enqueue_scripts()
 {
-    wp_register_script('jquery-v-3', 'https://code.jquery.com/jquery-3.5.1.min.js', array(), date("h:i:s"));
-    wp_enqueue_script('jquery-v-3');
+	wp_register_script('lib', 'https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js', array(), date("h:i:s"));
+	wp_enqueue_script('lib');
 
-	wp_enqueue_script('my', get_template_directory_uri() . '/assets/js/my.js', array(), date("h:i:s"));
+	wp_register_script('jquery', 'https://code.jquery.com/jquery-3.5.1.min.js', array(), date("h:i:s"));
+	wp_enqueue_script('jquery');
+
+	wp_register_script('slick', get_template_directory_uri() . '/assets/js/slick.min.js', array('jquery'), date("h:i:s"));
+	wp_enqueue_script('slick');
+
+	wp_register_script('nice-select', get_template_directory_uri() . '/assets/js/jquery.nice-select.min.js', array('jquery'), date("h:i:s"));
+	wp_enqueue_script('nice-select');
+
+	wp_register_script('validation', get_template_directory_uri() . '/assets/js/validation.js', array('jquery'), date("h:i:s"));
+	wp_enqueue_script('validation');
+
+	wp_register_script('main', get_template_directory_uri() . '/assets/js/main.js', array('jquery'), date("h:i:s"));
+	wp_enqueue_script('main');
+
+	wp_enqueue_script('my', get_template_directory_uri() . '/assets/js/my.js', array('jquery'), date("h:i:s"));
 	wp_enqueue_script('my');
 }
 
