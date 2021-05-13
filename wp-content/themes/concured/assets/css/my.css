@@ -1,0 +1,39 @@
+.success-item__description > ul > li::before {
+    content: '';
+    height: 16px;
+    min-width: 16px;
+    margin: 0 18px 0 0;
+    background: url(./assets/img/icons/check.svg) center / auto no-repeat !important;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+}
+
+.owl-carousel .owl-item img {
+    width: auto !important;
+}
+
+.tablepress tfoot th, .tablepress thead th {
+    background-color: #fff !important;
+}
+
+table, table.tablepress {
+    border-radius: var(--radius-32) !important;
+}
+
+#adminmenu .wp-not-current-submenu .wp-submenu, .folded #adminmenu .wp-has-current-submenu .wp-submenu {
+    min-width: 200px !important;
+}
+
+#submit-btn:disabled {
+    opacity: 0.5;
+}
+
+.relative p, .copyright p {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.login h1 a {
+    background-image: url(../img/w-logo-blue.png2) !important;
+}
