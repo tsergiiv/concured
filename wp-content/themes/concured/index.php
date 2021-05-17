@@ -6,21 +6,7 @@
 	<main class="content">
 		<div class="main-page">
 			<?= get_template_part('blocks/block-main-top') ?>
-			<section class="clients container">
-				<div class="clients-title">A few of our clients</div>
-				<div class="clients-wrap">
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/hp.png" alt=""></div>
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/idg.png" alt=""></div>
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/spg.png" alt=""></div>
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/nationwide.png" alt=""></div>
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/wpp.png" alt=""></div>
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/bbc.png" alt=""></div>
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/samsung.png" alt=""></div>
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/mc.png" alt=""></div>
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/financialtimes.png" alt=""></div>
-					<div class="clients-elem"><img class="clients-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/clients/mcsaatchi.png" alt=""></div>
-				</div>
-			</section>
+			<?= get_template_part('blocks/block-clients') ?>
 			<section class="container video">
 				<video class="video-content" width="100" poster="<?php bloginfo('template_url'); ?>/assets/img/content/video/videoprev.png" muted="muted" playsinline>
 					<source src="<?php bloginfo('template_url'); ?>/assets/img/content/video/video.mp4" type="video/mp4"><img src="<?php bloginfo('template_url'); ?>/assets/img/content/video/videoprev.png" title="Your browser does not support the &lt;video&gt; tag">

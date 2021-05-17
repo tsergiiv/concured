@@ -5,23 +5,22 @@
         </div>
         <div class="big-slider-top">
 	        <?php
-	        $posts = get_posts( array(
-			        'post_type' => 'titles',
-	        ) );
+		        $posts = get_posts( array(
+				        'post_type' => 'titles',
+		        ) );
 
-	        foreach( $posts as $post ) {
-		        setup_postdata($post);
-		        ?>
+		        foreach( $posts as $post ) {
+			        setup_postdata($post);
+			        ?>
 
-		        <div class="big-slider-desc"><?= the_field('awards_label') ?></div>
-		        <h1 class="big-slider-heading"><?= the_field('awards_title') ?></h1>
+			        <div class="big-slider-desc"><?= the_field('awards_label') ?></div>
+			        <h1 class="big-slider-heading"><?= the_field('awards_title') ?></h1>
 
-		        <?php
-	        }
+			        <?php
+		        }
 
-	        wp_reset_postdata();
+		        wp_reset_postdata();
 	        ?>
-
         </div>
         <div class="big-slider-wrap awards-slider">
             <?php
