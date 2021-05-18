@@ -149,4 +149,28 @@ function create_subjects_hierarchical_taxonomy() {
 		'query_var' => true,
 		'rewrite' => array( 'slug' => 'faq-category' ),
 	));
+
+	$labels = array(
+		'name' => _x( 'Team Categories', 'taxonomy general name' ),
+		'singular_name' => _x( 'Team Category', 'taxonomy singular name' ),
+		'search_items' =>  __( 'Search Team Category' ),
+		'all_items' => __( 'All Team Categories' ),
+		'parent_item' => __( 'Parent Team Category' ),
+		'parent_item_colon' => __( 'Parent Team Category:' ),
+		'edit_item' => __( 'Edit Team Category' ),
+		'update_item' => __( 'Update Team Category' ),
+		'add_new_item' => __( 'Add Team Category' ),
+		'new_item_name' => __( 'New Team Category' ),
+		'menu_name' => __( 'Team Categories' ),
+	);
+
+	register_taxonomy('team-category',array('team'), array(
+		'hierarchical' => true,
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_in_rest' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array( 'slug' => 'team-category' ),
+	));
 }
