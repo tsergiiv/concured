@@ -36,6 +36,7 @@ function enqueue_scripts()
 }
 
 add_theme_support( 'menus' );
+add_theme_support( 'post-thumbnails' );
 
 require get_template_directory() . '/post-types.php';
 

@@ -126,7 +126,7 @@
 			<nav class="header-nav">
 				<div class="header-nav-elem header-nav-dd-btn">Company
 					<div class="header-nav-dd"><a class="header-nav-dd-link" href="">Platform</a><a class="header-nav-dd-link" href="">Services</a></div>
-				</div><a class="header-nav-elem" href="">Partners</a><a class="header-nav-elem" href="">Industries</a><a class="header-nav-elem" href="">Pricing</a><a class="header-nav-elem" href="">Blog</a>
+				</div><a class="header-nav-elem" href="">Partners</a><a class="header-nav-elem" href="">Industries</a><a class="header-nav-elem" href="">Pricing</a><a class="header-nav-elem" href="<?= get_home_url(); ?>/blog">Blog</a>
 			</nav>
 			<div class="header-user"><a class="header-login" href="">
 					<svg class="header-login-icon">
