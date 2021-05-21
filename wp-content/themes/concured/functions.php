@@ -175,3 +175,54 @@ function create_subjects_hierarchical_taxonomy() {
 		'rewrite' => array( 'slug' => 'team-category' ),
 	));
 }
+
+function add_class_to_paragraphs($content){
+	return preg_replace('/<p([^>]+)?>/', '<p$1 class="post-content-paragraph">', $content);
+}
+add_filter('the_content', 'add_class_to_paragraphs');
+
+function add_class_to_figcaption($content){
+	return preg_replace('/<figcaption([^>]+)?>/', '<figcaption$1 class="post-content-photo-caption">', $content);
+}
+add_filter('the_content', 'add_class_to_figcaption');
+
+function add_class_to_figure($content){
+	return preg_replace('/wp-block-image/', 'post-content-photo', $content);
+}
+add_filter('the_content', 'add_class_to_figure');
+
+function add_class_to_img($content){
+	return preg_replace('/wp-image-([1-9]*)/', 'wp-image-$1 post-content-photo-img', $content);
+}
+add_filter('the_content', 'add_class_to_img');
+
+function wrap_img($content){
+	return preg_replace('/<img([^>]+)?>/', '<div class="post-content-photo-img-wrap"><img$1></div>', $content);
+}
+add_filter('the_content', 'wrap_img');
+
+function wpb_set_post_views($postID) {
+	$count_key = 'wpb_post_views_count';
+	$count = get_post_meta($postID, $count_key, true);
+	if($count==''){
+		$count = 0;
+		delete_post_meta($postID, $count_key);
+		add_post_meta($postID, $count_key, '0');
+	}else{
+		$count++;
+		update_post_meta($postID, $count_key, $count);
+	}
+}
+//To keep the count accurate, lets get rid of prefetching
+remove_action( 'wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
+
+function wpb_get_post_views($postID){
+	$count_key = 'wpb_post_views_count';
+	$count = get_post_meta($postID, $count_key, true);
+	if($count==''){
+		delete_post_meta($postID, $count_key);
+		add_post_meta($postID, $count_key, '0');
+		return "0 View";
+	}
+	return $count.' Views';
+}

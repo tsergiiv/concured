@@ -35,8 +35,10 @@
     <div class="article-slider-wrap">
         <?php
             $posts = get_posts( array(
-                'post_type' => 'post',
-                'numberposts' => 6,
+                'post_type'   => 'post',
+                'numberposts' => 10,
+	            'orderby'     => 'date',
+	            'order'       => 'DESC',
             ) );
 
             foreach( $posts as $post ) {
