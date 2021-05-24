@@ -174,6 +174,30 @@ function create_subjects_hierarchical_taxonomy() {
 		'query_var' => true,
 		'rewrite' => array( 'slug' => 'team-category' ),
 	));
+
+    $labels = array(
+        'name' => _x( 'Price Categories', 'taxonomy general name' ),
+        'singular_name' => _x( 'Price Category', 'taxonomy singular name' ),
+        'search_items' =>  __( 'Search Price Category' ),
+        'all_items' => __( 'All Price Categories' ),
+        'parent_item' => __( 'Parent Price Category' ),
+        'parent_item_colon' => __( 'Parent Price Category:' ),
+        'edit_item' => __( 'Edit Price Category' ),
+        'update_item' => __( 'Update Price Category' ),
+        'add_new_item' => __( 'Add Team Category' ),
+        'new_item_name' => __( 'New Team Category' ),
+        'menu_name' => __( 'Price Categories' ),
+    );
+
+    register_taxonomy('price-category',array('price'), array(
+        'hierarchical' => true,
+        'labels' => $labels,
+        'show_ui' => true,
+        'show_in_rest' => true,
+        'show_admin_column' => true,
+        'query_var' => true,
+        'rewrite' => array( 'slug' => 'price-category' ),
+    ));
 }
 
 function add_class_to_paragraphs($content){

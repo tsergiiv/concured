@@ -25,33 +25,54 @@
             </div>
             <div class="price-plan-wrap">
                 <div class="price-plan-category">
-                    <div class="price-plan-category-elem">
-                        <div class="price-plan-category-elem-heading">Auditing</div>
-                        <ul class="custom-list price-plan-category-list">
-                            <li>Up to 5 souces</li>
-                            <li>Up to 10 souces</li>
-                            <li>Up to 20 souces</li>
-                        </ul>
-                    </div>
-                    <div class="price-plan-category-elem">
-                        <div class="price-plan-category-elem-heading">Stategy</div>
-                        <ul class="custom-list price-plan-category-list">
-                            <li>Up to 5 souces</li>
-                            <li>Up to 10 souces</li>
-                            <li>Up to 20 souces</li>
-                        </ul>
-                    </div>
-                    <div class="price-plan-category-elem">
-                        <div class="price-plan-category-elem-heading">Personalization</div>
-                        <ul class="custom-list price-plan-category-list">
-                            <li>Page Views Per Month</li>
-                            <li>Content Sources</li>
-                            <li>Content Volume</li>
-                            <li>Industry (Finance)</li>
-                            <li>Industry (Finance)</li>
-                            <li>Industry (Healthcare)</li>
-                        </ul>
-                    </div>
+                    <?php
+                        $categories = get_categories( [
+                            'taxonomy'   => 'price-category',
+                            'type'       => 'price',
+                            'orderby'    => 'term_id',
+                            'order'      => 'ASC',
+                            'hide_empty' => 0,
+                        ] );
+
+                        $n = 1;
+                        if( $categories ) {
+                            foreach( $categories as $cat ) {
+                                ?>
+
+                                <div class="price-plan-category-elem">
+                                    <div class="price-plan-category-elem-heading"><?= $cat->name ?></div>
+                                    <ul class="custom-list price-plan-category-list">
+                                        <?php
+                                        $posts = get_posts( array(
+                                            'post_type'   => 'price',
+                                            'numberposts' => 10,
+                                            'tax_query'   => array(
+                                                array(
+                                                    'taxonomy' => 'price-category',
+                                                    'field' => 'price-category',
+                                                    'terms' => $cat->term_id,
+                                                )
+                                            )
+                                        ) );
+
+                                        foreach( $posts as $post ) {
+                                            setup_postdata($post);
+                                            ?>
+
+                                            <li><?= the_field('label') ?></li>
+
+                                            <?php
+                                        }
+
+                                        wp_reset_postdata();
+                                        ?>
+                                    </ul>
+                                </div>
+
+                                <?php
+                            }
+                        }
+                    ?>
                 </div>
                 <div class="price-plan-info">
                     <div class="price-plan-info-wrap">
@@ -60,14 +81,54 @@
                                 <div class="info-wrap-icon price-plan-info-elem-icon"><img class="info-wrap-icon-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/software-icon.svg" alt=""></div>
                                 <div class="price-plan-info-elem-heading">Software</div>
                                 <ul class="price-plan-info-elem-list">
-                                    <li>$ 1,295.00</li>
-                                    <li>$ 1,945.00</li>
-                                    <li>$ 3,245.00</li>
+                                    <?php
+                                        $posts = get_posts( array(
+                                            'post_type' => 'price',
+                                            'tax_query'   => array(
+                                                array(
+                                                    'taxonomy' => 'price-category',
+                                                    'field' => 'slug',
+                                                    'terms' => 'auditing',
+                                                )
+                                            )
+                                        ) );
+
+                                        foreach( $posts as $post ) {
+                                            setup_postdata($post);
+                                            ?>
+
+                                            <li>$ <?= number_format(get_field('option_1'), 2, '.', ',') ?></li>
+
+                                            <?php
+                                        }
+
+                                        wp_reset_postdata();
+                                    ?>
                                 </ul>
                                 <ul class="price-plan-info-elem-list second-list">
-                                    <li>$ 2,295.00</li>
-                                    <li>$ 4,935.00</li>
-                                    <li>$ 7,795.00</li>
+                                    <?php
+                                        $posts = get_posts( array(
+                                            'post_type' => 'price',
+                                            'tax_query'   => array(
+                                                array(
+                                                    'taxonomy' => 'price-category',
+                                                    'field' => 'slug',
+                                                    'terms' => 'strategy',
+                                                )
+                                            )
+                                        ) );
+
+                                        foreach( $posts as $post ) {
+                                            setup_postdata($post);
+                                            ?>
+
+                                            <li>$ <?= number_format(get_field('option_1'), 2, '.', ',') ?></li>
+
+                                            <?php
+                                        }
+
+                                        wp_reset_postdata();
+                                    ?>
                                 </ul>
                             </div>
                         </div>
@@ -76,14 +137,54 @@
                                 <div class="info-wrap-icon price-plan-info-elem-icon"><img class="info-wrap-icon-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/people-icon.svg" alt=""></div>
                                 <div class="price-plan-info-elem-heading">Service</div>
                                 <ul class="price-plan-info-elem-list">
-                                    <li>$ 2,595.00</li>
-                                    <li>$ 3,895.00</li>
-                                    <li>$ 6,495.00</li>
+                                    <?php
+                                        $posts = get_posts( array(
+                                            'post_type' => 'price',
+                                            'tax_query'   => array(
+                                                array(
+                                                    'taxonomy' => 'price-category',
+                                                    'field' => 'slug',
+                                                    'terms' => 'auditing',
+                                                )
+                                            )
+                                        ) );
+
+                                        foreach( $posts as $post ) {
+                                            setup_postdata($post);
+                                            ?>
+
+                                            <li>$ <?= number_format(get_field('option_2'), 2, '.', ',') ?></li>
+
+                                            <?php
+                                        }
+
+                                        wp_reset_postdata();
+                                    ?>
                                 </ul>
                                 <ul class="price-plan-info-elem-list second-list">
-                                    <li>$ 5,845.00</li>
-                                    <li>$ 9,745.00</li>
-                                    <li>$ 15,595.00</li>
+                                    <?php
+                                        $posts = get_posts( array(
+                                            'post_type' => 'price',
+                                            'tax_query'   => array(
+                                                array(
+                                                    'taxonomy' => 'price-category',
+                                                    'field' => 'slug',
+                                                    'terms' => 'strategy',
+                                                )
+                                            )
+                                        ) );
+
+                                        foreach( $posts as $post ) {
+                                            setup_postdata($post);
+                                            ?>
+
+                                            <li>$ <?= number_format(get_field('option_2'), 2, '.', ',') ?></li>
+
+                                            <?php
+                                        }
+
+                                        wp_reset_postdata();
+                                    ?>
                                 </ul>
                             </div>
                         </div>
@@ -91,12 +192,30 @@
                     <div class="price-plan-info-elem one">
                         <div class="price-plan-info-elem-content">
                             <ul class="price-plan-info-elem-list">
-                                <li>$ 0.01</li>
-                                <li>$ 260.00</li>
-                                <li>$ 0.01</li>
-                                <li>10x</li>
-                                <li>5x</li>
-                                <li>10x</li>
+                                <?php
+                                    $posts = get_posts( array(
+                                        'post_type'   => 'price',
+                                        'numberposts' => 10,
+                                        'tax_query'   => array(
+                                            array(
+                                                'taxonomy' => 'price-category',
+                                                'field' => 'slug',
+                                                'terms' => 'personalization',
+                                            )
+                                        )
+                                    ) );
+
+                                    foreach( $posts as $post ) {
+                                        setup_postdata($post);
+                                        ?>
+
+                                        <li><?= get_field('type') == 'Price' ? '$ ' . number_format(get_field('option_1'), 2, '.', ',') : get_field('option_1') ?></li>
+
+                                        <?php
+                                    }
+
+                                    wp_reset_postdata();
+                                ?>
                             </ul>
                         </div>
                     </div>

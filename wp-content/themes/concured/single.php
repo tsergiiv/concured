@@ -61,10 +61,12 @@
                         </div>
                         <div class="post-footer">
                             <div class="post-share">
-                                <div class="post-share-title">Share </div>
-                                <div class="post-share-wrap"><a class="post-share-link" href=""> <img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/fb-c-logo.svg" alt="Facebook logo"></a><a class="post-share-link" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/tw-c-logo.svg" alt="Twitter logo"></a><a class="post-share-link" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/tm-c-logo.svg" alt="Telegram logo"></a></div>
+                                <div class="post-share-title">Share</div>
+                                <?= do_shortcode('[addtoany]') ?>
                             </div>
-                            <div class="post-up-btn info-wrap-icon"><img class="info-wrap-icon-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/arrow-up.svg" alt=""></div>
+                            <div class="post-up-btn info-wrap-icon">
+                                <img class="info-wrap-icon-img" src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/arrow-up.svg" alt="">
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -114,69 +116,44 @@
                     </div>
                 </div>
                 <div class="article-slider-wrap">
-                    <div class="article-slider-elem">
-                        <article class="article-elem"><a class="article-cover" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-img-1.jpg" alt="Article #1"></a>
-                            <div class="article-info">
-                                <div class="article-tag">Article</div>
-                                <div class="article-date">14 september 14:44</div>
-                            </div>
-                            <div class="article-name">Effective Ways To Seamlessly Boost Your Brand Marketing</div><a class="read-more article-read-more" href="">Read more</a>
-                        </article>
-                    </div>
-                    <div class="article-slider-elem">
-                        <article class="article-elem"><a class="article-cover" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-img-2.jpg" alt="Article #1"></a>
-                            <div class="article-info">
-                                <div class="article-tag">Article</div>
-                                <div class="article-date">14 september 14:44</div>
-                            </div>
-                            <div class="article-name">How To Hold Your Audience’s Attention By Having A Conversation</div><a class="read-more article-read-more" href="">Read more</a>
-                        </article>
-                    </div>
-                    <div class="article-slider-elem">
-                        <article class="article-elem"><a class="article-cover" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-img-3.jpg" alt="Article #1"></a>
-                            <div class="article-info">
-                                <div class="article-tag">Article</div>
-                                <div class="article-date">14 september 14:44</div>
-                            </div>
-                            <div class="article-name">How To Save Time In Content Creation While Effectively Communicating</div><a class="read-more article-read-more" href="">Read more</a>
-                        </article>
-                    </div>
-                    <div class="article-slider-elem">
-                        <article class="article-elem"><a class="article-cover" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-img-1.jpg" alt="Article #1"></a>
-                            <div class="article-info">
-                                <div class="article-tag">Article</div>
-                                <div class="article-date">14 september 14:44</div>
-                            </div>
-                            <div class="article-name">Effective Ways To Seamlessly Boost Your Brand Marketing</div><a class="read-more article-read-more" href="">Read more</a>
-                        </article>
-                    </div>
-                    <div class="article-slider-elem">
-                        <article class="article-elem"><a class="article-cover" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-img-2.jpg" alt="Article #1"></a>
-                            <div class="article-info">
-                                <div class="article-tag">Article</div>
-                                <div class="article-date">14 september 14:44</div>
-                            </div>
-                            <div class="article-name">How To Hold Your Audience’s Attention By Having A Conversation</div><a class="read-more article-read-more" href="">Read more</a>
-                        </article>
-                    </div>
-                    <div class="article-slider-elem">
-                        <article class="article-elem"><a class="article-cover" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-img-3.jpg" alt="Article #1"></a>
-                            <div class="article-info">
-                                <div class="article-tag">Article</div>
-                                <div class="article-date">14 september 14:44</div>
-                            </div>
-                            <div class="article-name">How To Save Time In Content Creation While Effectively Communicating</div><a class="read-more article-read-more" href="">Read more</a>
-                        </article>
-                    </div>
-                    <div class="article-slider-elem">
-                        <article class="article-elem"><a class="article-cover" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-img-1.jpg" alt="Article #1"></a>
-                            <div class="article-info">
-                                <div class="article-tag">Article</div>
-                                <div class="article-date">14 september 14:44</div>
-                            </div>
-                            <div class="article-name">Effective Ways To Seamlessly Boost Your Brand Marketing</div><a class="read-more article-read-more" href="">Read more</a>
-                        </article>
-                    </div>
+                    <?php
+                        $orig_post = $post;
+                        global $post;
+                        $tags = wp_get_post_tags(get_the_ID());
+                        if ($tags) {
+                            $tag_ids = array();
+                            foreach($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
+                            $args=array(
+                                'tag__in' => $tag_ids,
+                                'post__not_in' => array(get_the_ID()),
+                                'posts_per_page' => 10, // Number of related posts that will be shown.
+                                'ignore_sticky_posts' => 1
+                            );
+                            $my_query = new wp_query( $args );
+                            if( $my_query->have_posts() ) {
+                                while( $my_query->have_posts() ) {
+                                    $my_query->the_post(); ?>
+
+                                    <div class="article-slider-elem">
+                                        <article class="article-elem">
+                                            <a class="article-cover" href="<?= the_permalink() ?>">
+                                                <img src="<?= the_post_thumbnail() ?>" alt="Article">
+                                            </a>
+                                            <div class="article-info">
+                                                <div class="article-tag">Article</div>
+                                                <div class="article-date"><?= strtolower(get_the_date()) ?> <?= the_time() ?></div>
+                                            </div>
+                                            <div class="article-name"><?= the_title() ?></div>
+                                            <a class="read-more article-read-more" href="<?= the_permalink() ?>">Read more</a>
+                                        </article>
+                                    </div>
+
+                                <?php }
+                            }
+                        }
+                        $post = $orig_post;
+                        wp_reset_query();
+                    ?>
                 </div>
             </section>
         </div>
