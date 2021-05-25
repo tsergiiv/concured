@@ -16,13 +16,14 @@
 				<div class="modal-close"><img src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/cross-icon.svg" alt=""></div>
 				<div class="modal-content-wrap">
 					<div class="modal-heading">Book Demo</div>
-					<form class="modal-form form-validate" action="#" novalidate>
-						<div class="modal-input-wrap"><span class="modal-input-title">Full name</span>
+					<form class="modal-form form-validate" method="post" novalidate>
+                        <input type="text" name="action" value="<?= admin_url('admin-ajax.php?action=send_mail') ?>" hidden>
+                        <div class="modal-input-wrap"><span class="modal-input-title">Full name</span>
 							<label class="modal-input-label">
 								<svg class="modal-input-icon">
 									<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#login-icon"></use>
 								</svg>
-								<input class="modal-input" type="text" placeholder="Enter your full name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your name</span>
+								<input class="modal-input" id="full_name" type="text" placeholder="Enter your full name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your name</span>
 							</label>
 						</div>
 						<div class="modal-input-wrap"><span class="modal-input-title">Company name</span>
@@ -30,7 +31,7 @@
 								<svg class="modal-input-icon">
 									<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#bag"></use>
 								</svg>
-								<input class="modal-input" type="text" placeholder="Enter your company name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your company name</span>
+								<input class="modal-input" id="company_name" type="text" placeholder="Enter your company name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your company name</span>
 							</label>
 						</div>
 						<div class="modal-input-wrap"><span class="modal-input-title">Business email</span>
@@ -38,7 +39,7 @@
 								<svg class="modal-input-icon">
 									<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#at-icon"></use>
 								</svg>
-								<input class="modal-input" type="email" placeholder="Enter your email address" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter a valid email address</span>
+								<input class="modal-input" id="business_email" type="email" placeholder="Enter your email address" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter a valid email address</span>
 							</label>
 						</div>
 						<div class="modal-accept">
@@ -115,18 +116,72 @@
 		<div class="mobile-menu-wrap">
 			<button class="mobile-menu-link mobile-menu-dd-btn">Company
 				<div class="mobile-menu-dd"><a class="mobile-menu-link" href="">Platform</a><a class="mobile-menu-link" href="">Services</a></div>
-			</button><a class="mobile-menu-link" href="">Partners</a><a class="mobile-menu-link" href="">Industries</a><a class="mobile-menu-link" href="">Pricing</a><a class="mobile-menu-link" href="">Blog</a>
+			</button>
+            <a class="mobile-menu-link" href="">Partners</a>
+            <a class="mobile-menu-link" href="">Industries</a>
+            <a class="mobile-menu-link" href="<?= get_home_url(); ?>/price">Pricing</a>
+            <a class="mobile-menu-link" href="<?= get_home_url(); ?>/blog">Blog</a>
 		</div>
 	</div>
 	<div class="wrapper">
-		<header class="header container"><a class="header-logo" href="<?= get_home_url(); ?>"><img src="<?php bloginfo('template_url'); ?>/assets/img/general/logo.svg" alt="Concured Logo"></a>
+		<header class="header container">
+            <a class="header-logo" href="<?= get_home_url(); ?>">
+                <img src="<?php bloginfo('template_url'); ?>/assets/img/general/logo.svg" alt="Concured Logo">
+            </a>
 			<button class="header-menu-btn">
 				<div class="header-menu-btn-cross"><span></span></div>
 			</button>
 			<nav class="header-nav">
 				<div class="header-nav-elem header-nav-dd-btn">Company
-					<div class="header-nav-dd"><a class="header-nav-dd-link" href="">Platform</a><a class="header-nav-dd-link" href="">Services</a></div>
-				</div><a class="header-nav-elem" href="">Partners</a><a class="header-nav-elem" href="">Industries</a><a class="header-nav-elem" href="">Pricing</a><a class="header-nav-elem" href="<?= get_home_url(); ?>/blog">Blog</a>
+					<div class="header-nav-dd">
+                        <?php
+                            $menuParameters = [
+                                'theme_location'  => '',
+                                'menu'            => 'sub-menu',
+                                'container'       => false,
+                                'container_class' => '',
+                                'container_id'    => '',
+                                'menu_class'      => '',
+                                'menu_id'         => '',
+                                'echo'            => false,
+                                'fallback_cb'     => 'wp_page_menu',
+                                'before'          => '',
+                                'after'           => '',
+                                'link_before'     => '',
+                                'link_after'      => '',
+                                'items_wrap'      => '%3$s',
+                                'depth'           => 0,
+                                'walker'          => '',
+                                'link_class'      => 'header-nav-dd-link',
+                            ];
+
+                            echo strip_tags(wp_nav_menu( $menuParameters ), '<a>' );
+                        ?>
+                    </div>
+				</div>
+                <?php
+                    $menuParameters = [
+                        'theme_location'  => '',
+                        'menu'            => 'top',
+                        'container'       => false,
+                        'container_class' => '',
+                        'container_id'    => '',
+                        'menu_class'      => '',
+                        'menu_id'         => '',
+                        'echo'            => false,
+                        'fallback_cb'     => 'wp_page_menu',
+                        'before'          => '',
+                        'after'           => '',
+                        'link_before'     => '',
+                        'link_after'      => '',
+                        'items_wrap'      => '%3$s',
+                        'depth'           => 0,
+                        'walker'          => '',
+                        'link_class'      => 'header-nav-elem',
+                    ];
+
+                    echo strip_tags(wp_nav_menu( $menuParameters ), '<a>' );
+                ?>
 			</nav>
 			<div class="header-user"><a class="header-login" href="">
 					<svg class="header-login-icon">

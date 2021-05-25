@@ -8,18 +8,28 @@
         <section class="price-plan container"><img class="price-plan-bg" src="<?php bloginfo('template_url'); ?>/assets/img/content/block-bg/magnifier-img.png" alt="">
             <div class="price-plan-heading">
                 <div class="price-plan-heading-text">
-                    <div class="info-wrap-desc sm">Pricing</div>
-                    <div class="info-wrap-heading big">Find the right plan</div>
+                    <?php
+                        $posts = get_posts( array(
+                            'post_type' => 'titles',
+                        ) );
+
+                        foreach( $posts as $post ) {
+                            setup_postdata($post);
+                            ?>
+
+                            <div class="info-wrap-desc sm"><?= the_field('price_label') ?></div>
+                            <div class="info-wrap-heading big"><?= the_field('price_title') ?></div>
+
+                            <?php
+                        }
+
+                        wp_reset_postdata();
+                    ?>
                 </div>
                 <div class="price-plan-select">
-                    <select class="custom-select">
-                        <option value="0">USD</option>
-                        <option value="1">EUR</option>
-                        <option value="2">JPY</option>
-                        <option value="3">GBP</option>
-                        <option value="4">CHF</option>
-                        <option value="5">CAD</option>
-                        <option value="6">PLN</option>
+                    <select class="custom-select" id="currency-list">
+                        <option value="usd">USD</option>
+                        <option value="eur">EUR</option>
                     </select>
                 </div>
             </div>
@@ -97,7 +107,7 @@
                                             setup_postdata($post);
                                             ?>
 
-                                            <li>$ <?= number_format(get_field('option_1'), 2, '.', ',') ?></li>
+                                            <li usd="<?= get_field('usd_price_1') ?>" eur="<?= get_field('eur_price_1') ?>">$ <?= number_format(get_field('usd_price_1'), 2, '.', ',') ?></li>
 
                                             <?php
                                         }
@@ -122,7 +132,7 @@
                                             setup_postdata($post);
                                             ?>
 
-                                            <li>$ <?= number_format(get_field('option_1'), 2, '.', ',') ?></li>
+                                            <li usd="<?= get_field('usd_price_1') ?>" eur="<?= get_field('eur_price_1') ?>">$ <?= number_format(get_field('usd_price_1'), 2, '.', ',') ?></li>
 
                                             <?php
                                         }
@@ -153,7 +163,7 @@
                                             setup_postdata($post);
                                             ?>
 
-                                            <li>$ <?= number_format(get_field('option_2'), 2, '.', ',') ?></li>
+                                            <li usd="<?= get_field('usd_price_2') ?>" eur="<?= get_field('eur_price_2') ?>">$ <?= number_format(get_field('usd_price_2'), 2, '.', ',') ?></li>
 
                                             <?php
                                         }
@@ -178,7 +188,7 @@
                                             setup_postdata($post);
                                             ?>
 
-                                            <li>$ <?= number_format(get_field('option_2'), 2, '.', ',') ?></li>
+                                            <li usd="<?= get_field('usd_price_2') ?>" eur="<?= get_field('eur_price_2') ?>">$ <?= number_format(get_field('usd_price_2'), 2, '.', ',') ?></li>
 
                                             <?php
                                         }
@@ -209,7 +219,7 @@
                                         setup_postdata($post);
                                         ?>
 
-                                        <li><?= get_field('type') == 'Price' ? '$ ' . number_format(get_field('option_1'), 2, '.', ',') : get_field('option_1') ?></li>
+                                        <li <?php if (get_field('is_price')): ?>usd="<?= get_field('usd_price_1') ?>" eur="<?= get_field('eur_price_1') ?>"<?php endif ?>><?= get_field('is_price') ? '$ ' . number_format(get_field('usd_price_1'), 2, '.', ',') : get_field('multiplier') ?></li>
 
                                         <?php
                                     }
@@ -229,5 +239,26 @@
         <?= get_template_part('blocks/block-insights') ?>
     </div>
 </main>
+
+<script>
+    jQuery('#currency-list').change(function() {
+       let currency = jQuery(this).val();
+       let prices = jQuery('li[' + currency + ']');
+       let sign = '$';
+       if (currency == 'eur') {
+           sign = '€';
+       }
+       jQuery(prices).each(function() {
+           let price = jQuery(this).attr(currency);
+           jQuery(this).text(sign + ' ' + formatNumber(price));
+       });
+    });
+
+    function formatNumber(number) {
+        return Number(parseFloat(number).toFixed(2)).toLocaleString('en', {
+            minimumFractionDigits: 2
+        });
+    }
+</script>
 
 <?php get_footer(); ?>

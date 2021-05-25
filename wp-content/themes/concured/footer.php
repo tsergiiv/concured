@@ -26,24 +26,50 @@
 				</div>
 			</div>
 			<div class="footer-b">
-				<div class="footer-b-elem"><span class="footer-copyright">© 2020 All Rights Reserved</span></div>
-				<div class="footer-b-elem"><a class="footer-link" href="">Privacy Policy</a><a class="footer-link" href="">Terms of use</a></div>
-				<div class="footer-b-elem">
-					<div class="footer-social">
-						<a class="footer-social-link" href="">
-							<img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/inst-logo.svg" alt="Instagram">
-						</a>
-						<a class="footer-social-link" href="">
-							<img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/fb-logo.svg" alt="Facebook">
-						</a>
-						<a class="footer-social-link" href="">
-							<img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/yt-logo.svg" alt="YouTube">
-						</a>
-						<a class="footer-social-link" href="">
-							<img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/in-logo.svg" alt="Linkedin">
-						</a>
-					</div>
-				</div>
+                <?php
+                    $posts = get_posts( array(
+                        'post_type' => 'footer',
+                    ) );
+
+                    foreach( $posts as $post ) {
+                        setup_postdata($post);
+                        ?>
+
+                        <div class="footer-b-elem"><span class="footer-copyright"><?= the_field('copyright') ?></span></div>
+                        <div class="footer-b-elem">
+                            <a class="footer-link" href="<?= get_home_url(); ?>/privacy-policy">Privacy Policy</a>
+                            <a class="footer-link" href="<?= get_home_url(); ?>/terms-of-use">Terms of use</a>
+                        </div>
+                        <div class="footer-b-elem">
+                            <div class="footer-social">
+                                <?php if (get_field('instagram')): ?>
+                                <a class="footer-social-link" href="<?= the_field('instagram') ?>" target="_blank">
+                                    <img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/inst-logo.svg" alt="Instagram">
+                                </a>
+                                <?php endif ?>
+                                <?php if (get_field('facebook')): ?>
+                                <a class="footer-social-link" href="<?= the_field('facebook') ?>" target="_blank">
+                                    <img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/fb-logo.svg" alt="Facebook">
+                                </a>
+                                <?php endif ?>
+                                <?php if (get_field('youtube')): ?>
+                                <a class="footer-social-link" href="<?= the_field('youtube') ?>" target="_blank">
+                                    <img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/yt-logo.svg" alt="YouTube">
+                                </a>
+                                <?php endif ?>
+                                <?php if (get_field('linkedin')): ?>
+                                <a class="footer-social-link" href="<?= the_field('linkedin') ?>" target="_blank">
+                                    <img src="<?php bloginfo('template_url'); ?>/assets/img/general/social/in-logo.svg" alt="Linkedin">
+                                </a>
+                                <?php endif ?>
+                            </div>
+                        </div>
+
+                        <?php
+                    }
+
+                    wp_reset_postdata();
+                ?>
 			</div>
 		</footer>
 	</div>
