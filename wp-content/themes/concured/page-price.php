@@ -3,7 +3,12 @@
 <main class="content">
     <div class="price-page">
         <section class="breadcrumbs-wrap container">
-            <div class="breadcrumbs"><a class="breadcrumbs-link" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/concured-sl.svg" alt=""></a><a class="breadcrumbs-link" href="">Pricing </a></div>
+            <div class="breadcrumbs">
+                <a class="breadcrumbs-link" href="<?= get_home_url(); ?>">
+                    <img src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/concured-sl.svg" alt="">
+                </a>
+                <a class="breadcrumbs-link" href=""><?= the_title() ?></a>
+            </div>
         </section>
         <section class="price-plan container"><img class="price-plan-bg" src="<?php bloginfo('template_url'); ?>/assets/img/content/block-bg/magnifier-img.png" alt="">
             <div class="price-plan-heading">

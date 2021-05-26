@@ -1,9 +1,21 @@
 <?php get_header(); ?>
 
+<?php
+    $offset = 0;
+
+    $args = array(
+        'posts_per_page' => -1,
+        'post_type'      => 'post',
+    );
+
+    $posts_query = new WP_Query($args);
+    $post_count = $posts_query->post_count;
+?>
+
     <main class="content">
         <div class="blog-page">
             <section class="breadcrumbs-wrap container">
-                <div class="breadcrumbs"><a class="breadcrumbs-link" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/concured-sl.svg" alt=""></a><a class="breadcrumbs-link" href="">Blog </a></div>
+                <div class="breadcrumbs"><a class="breadcrumbs-link" href="<?= get_home_url(); ?>"><img src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/concured-sl.svg" alt=""></a><a class="breadcrumbs-link" href=""><?= the_title() ?></a></div>
             </section>
             <section class="page-head container">
 	            <?php
@@ -27,7 +39,7 @@
 	            ?>
             </section>
             <section class="blog-article container">
-                <div class="blog-article-wrap">
+                <div class="blog-article-wrap" id="ajax-posts">
 	                <?php
 		                $posts = get_posts( array(
 			                'post_type' => 'post',
@@ -36,28 +48,14 @@
 
 		                foreach( $posts as $post ) {
 			                setup_postdata($post);
-			                ?>
-
-			                <div class="blog-article-elem">
-				                <article class="article-elem">
-					                <a class="article-cover" href="<?= the_permalink() ?>">
-						                <img src="<?= the_post_thumbnail() ?>" alt="Article #1">
-					                </a>
-					                <div class="article-info">
-						                <div class="article-tag">Article</div>
-						                <div class="article-date"><?= strtolower(get_the_date()) ?> <?= the_time() ?></div>
-					                </div>
-					                <div class="article-name"><?= the_title() ?></div><a class="read-more article-read-more" href="<?= the_permalink() ?>">Read more</a>
-				                </article>
-			                </div>
-
-			                <?php
+                            $offset++;
+                            get_template_part('blocks/block-blog-article');
 		                }
 
 		                wp_reset_postdata();
 	                ?>
                 </div>
-                <button class="btn-s btn-blue blog-article-btn">Load more Posts</button>
+                <button class="btn-s btn-blue blog-article-btn" id="more_posts" onclick="loadClick(<?php echo $offset; ?>)">Load more Posts</button>
             </section>
             <section class="big-slider blog-library">
                 <div class="big-slider-content">
@@ -123,5 +121,9 @@
             </section>
         </div>
     </main>
+
+    <script>
+        let postCount = <?= $post_count ?>;
+    </script>
 
 <?php get_footer(); ?>

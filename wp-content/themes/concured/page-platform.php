@@ -3,7 +3,7 @@
 <main class="content">
     <div class="platform-page">
         <section class="breadcrumbs-wrap container">
-            <div class="breadcrumbs"><a class="breadcrumbs-link" href=""><img src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/concured-sl.svg" alt=""></a><a class="breadcrumbs-link" href="">Platform </a></div>
+            <div class="breadcrumbs"><a class="breadcrumbs-link" href="<?= get_home_url(); ?>"><img src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/concured-sl.svg" alt=""></a><a class="breadcrumbs-link" href="">Platform </a></div>
         </section>
 	    <?= get_template_part('blocks/block-platform') ?>
 	    <?= get_template_part('blocks/block-faq') ?>

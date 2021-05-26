@@ -14,54 +14,69 @@
 			<div class="modal-bg"></div>
 			<div class="modal-body">
 				<div class="modal-close"><img src="<?php bloginfo('template_url'); ?>/assets/img/general/icons/cross-icon.svg" alt=""></div>
-				<div class="modal-content-wrap">
-					<div class="modal-heading">Book Demo</div>
-					<form class="modal-form form-validate" method="post" novalidate>
-                        <input type="text" name="action" value="<?= admin_url('admin-ajax.php?action=send_mail') ?>" hidden>
-                        <div class="modal-input-wrap"><span class="modal-input-title">Full name</span>
-							<label class="modal-input-label">
-								<svg class="modal-input-icon">
-									<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#login-icon"></use>
-								</svg>
-								<input class="modal-input" id="full_name" type="text" placeholder="Enter your full name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your name</span>
-							</label>
-						</div>
-						<div class="modal-input-wrap"><span class="modal-input-title">Company name</span>
-							<label class="modal-input-label">
-								<svg class="modal-input-icon">
-									<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#bag"></use>
-								</svg>
-								<input class="modal-input" id="company_name" type="text" placeholder="Enter your company name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your company name</span>
-							</label>
-						</div>
-						<div class="modal-input-wrap"><span class="modal-input-title">Business email</span>
-							<label class="modal-input-label">
-								<svg class="modal-input-icon">
-									<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#at-icon"></use>
-								</svg>
-								<input class="modal-input" id="business_email" type="email" placeholder="Enter your email address" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter a valid email address</span>
-							</label>
-						</div>
-						<div class="modal-accept">
-							<label class="modal-custom-checkbox">
-								<input class="modal-custom-checkbox-input" type="checkbox" name="update"><span class="modal-custom-checkbox-elem"></span>
-							</label>
-							<div class="modal-accept-text">Yes, please keep me updated on concured.com latest blogs, events and offers.</div>
-						</div>
-						<div class="modal-btn-wrap">
-							<button class="btn-s btn-grey modal-btn modal-cancel" type="button">Cancel</button>
-							<input class="btn-s btn-coral modal-btn" type="submit" value="Book now">
-						</div>
-					</form>
-				</div>
-				<div class="modal-success-wrap">
-					<div class="modal-success-img"><img class="modal-success-img-cloud small animate" src="<?php bloginfo('template_url'); ?>/assets/img/content/modal-success/success-img-cloud-small.png" alt="Success cloud small"><img class="modal-success-img-cloud big animate" src="<?php bloginfo('template_url'); ?>/assets/img/content/modal-success/success-img-cloud-big.png" alt="Success cloud big"><img class="modal-success-img-person animate" src="<?php bloginfo('template_url'); ?>/assets/img/content/modal-success/success-img-person.png" alt="Success person"></div>
-					<div class="modal-heading">Successful registration for demo</div>
-					<div class="modal-desc">Yes, please keep me updated on concured.com latest blogs, events and offers.</div>
-					<div class="modal-btn-wrap">
-						<button class="btn-s btn-grey modal-btn modal-cancel" type="button">Cancel</button><a class="btn-s btn-coral modal-btn" href="">Sign In</a>
-					</div>
-				</div>
+                <?php
+                    $posts = get_posts( array(
+                        'post_type' => 'modal',
+                    ) );
+
+                    foreach( $posts as $post ) {
+                        setup_postdata($post);
+                        ?>
+
+                        <div class="modal-content-wrap">
+                            <div class="modal-heading"><?= the_field('name') ?></div>
+                            <form class="modal-form form-validate" method="post" novalidate>
+                                <input type="text" name="action" value="<?= admin_url('admin-ajax.php?action=send_mail') ?>" hidden>
+                                <div class="modal-input-wrap"><span class="modal-input-title">Full name</span>
+                                    <label class="modal-input-label">
+                                        <svg class="modal-input-icon">
+                                            <use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#login-icon"></use>
+                                        </svg>
+                                        <input class="modal-input" id="full_name" type="text" placeholder="Enter your full name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your name</span>
+                                    </label>
+                                </div>
+                                <div class="modal-input-wrap"><span class="modal-input-title">Company name</span>
+                                    <label class="modal-input-label">
+                                        <svg class="modal-input-icon">
+                                            <use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#bag"></use>
+                                        </svg>
+                                        <input class="modal-input" id="company_name" type="text" placeholder="Enter your company name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your company name</span>
+                                    </label>
+                                </div>
+                                <div class="modal-input-wrap"><span class="modal-input-title">Business email</span>
+                                    <label class="modal-input-label">
+                                        <svg class="modal-input-icon">
+                                            <use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#at-icon"></use>
+                                        </svg>
+                                        <input class="modal-input" id="business_email" type="email" placeholder="Enter your email address" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter a valid email address</span>
+                                    </label>
+                                </div>
+                                <div class="modal-accept">
+                                    <label class="modal-custom-checkbox">
+                                        <input class="modal-custom-checkbox-input" type="checkbox" id="demo-checkbox" name="update"><span class="modal-custom-checkbox-elem"></span>
+                                    </label>
+                                    <div class="modal-accept-text"><?= the_field('checkbox_text') ?></div>
+                                </div>
+                                <div class="modal-btn-wrap">
+                                    <button class="btn-s btn-grey modal-btn modal-cancel" type="button">Cancel</button>
+                                    <input class="btn-s btn-coral modal-btn" type="submit" value="<?= the_field('book_button_text') ?>">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-success-wrap">
+                            <div class="modal-success-img"><img class="modal-success-img-cloud small animate" src="<?php bloginfo('template_url'); ?>/assets/img/content/modal-success/success-img-cloud-small.png" alt="Success cloud small"><img class="modal-success-img-cloud big animate" src="<?php bloginfo('template_url'); ?>/assets/img/content/modal-success/success-img-cloud-big.png" alt="Success cloud big"><img class="modal-success-img-person animate" src="<?php bloginfo('template_url'); ?>/assets/img/content/modal-success/success-img-person.png" alt="Success person"></div>
+                            <div class="modal-heading"><?= the_field('title') ?></div>
+                            <div class="modal-desc"><?= the_field('text') ?></div>
+                            <div class="modal-btn-wrap">
+                                <button class="btn-s btn-grey modal-btn modal-cancel" type="button">Cancel</button><a class="btn-s btn-coral modal-btn" href="<?= get_option('main_site') ?>"><?= the_field('success_button_text') ?></a>
+                            </div>
+                        </div>
+
+                        <?php
+                    }
+
+                    wp_reset_postdata();
+                ?>
 			</div>
 		</div>
 	</div>
@@ -183,7 +198,7 @@
                     echo strip_tags(wp_nav_menu( $menuParameters ), '<a>' );
                 ?>
 			</nav>
-			<div class="header-user"><a class="header-login" href="">
+			<div class="header-user"><a class="header-login" href="<?= get_option('main_site') ?>">
 					<svg class="header-login-icon">
 						<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#login-icon"></use>
 					</svg>Login</a>

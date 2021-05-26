@@ -250,10 +250,12 @@ jQuery(document).ready(function () {
         ;
 
         if (validation.verificationFields($this)) {
+            let keep_me_updated = jQuery('form #demo-checkbox').is(':checked');
             let formData = new FormData();
             formData.append('Full name', jQuery('form #full_name').val());
             formData.append('Company name', jQuery('form #company_name').val());
             formData.append('Business email', jQuery('form #business_email').val());
+            formData.append('Keep me updated', keep_me_updated ? 'yes' : 'no');
 
             jQuery.ajax({
                 url: action,
