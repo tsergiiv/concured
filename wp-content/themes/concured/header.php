@@ -26,6 +26,7 @@
                         <div class="modal-content-wrap">
                             <div class="modal-heading"><?= the_field('name') ?></div>
                             <form class="modal-form form-validate" method="post" novalidate>
+                                <input type="text" name="type" value="demo" hidden>
                                 <input type="text" name="action" value="<?= admin_url('admin-ajax.php?action=send_mail') ?>" hidden>
                                 <div class="modal-input-wrap"><span class="modal-input-title">Full name</span>
                                     <label class="modal-input-label">
@@ -88,12 +89,13 @@
 			<div class="modal-content-wrap">
 				<div class="modal-heading">Ask question</div>
 				<form class="modal-form form-validate" action="#" novalidate>
-					<div class="modal-input-wrap"><span class="modal-input-title">Name</span>
+                    <input type="text" name="type" value="faq" hidden>
+                    <div class="modal-input-wrap"><span class="modal-input-title">Name</span>
 						<label class="modal-input-label">
 							<svg class="modal-input-icon">
 								<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#login-icon"></use>
 							</svg>
-							<input class="modal-input" type="text" placeholder="Enter your name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your name</span>
+							<input class="modal-input" type="text" id="faq_name" placeholder="Enter your name" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your name</span>
 						</label>
 					</div>
 					<div class="modal-input-wrap"><span class="modal-input-title">Your email</span>
@@ -101,7 +103,7 @@
 							<svg class="modal-input-icon">
 								<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#at-icon"></use>
 							</svg>
-							<input class="modal-input" type="email" placeholder="Enter your email address" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter a valid email address</span>
+							<input class="modal-input" type="email" id="faq_email" placeholder="Enter your email address" required><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter a valid email address</span>
 						</label>
 					</div>
 					<div class="modal-input-wrap"><span class="modal-input-title">Message</span>
@@ -109,7 +111,7 @@
 							<svg class="modal-input-icon mail" fill="none">
 								<use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#mail-icon"></use>
 							</svg>
-							<textarea class="modal-input modal-textarea" placeholder="Enter your question" rows="1" required></textarea><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your question</span>
+							<textarea class="modal-input modal-textarea" id="faq_message"  placeholder="Enter your question" rows="1" required></textarea><span class="modal-input-border"></span><span class="modal-input-error-msg">Please enter your question</span>
 						</label>
 					</div>
 					<div class="modal-btn-wrap">
@@ -130,12 +132,55 @@
 		<div class="mobile-menu-bg"></div>
 		<div class="mobile-menu-wrap">
 			<button class="mobile-menu-link mobile-menu-dd-btn">Company
-				<div class="mobile-menu-dd"><a class="mobile-menu-link" href="">Platform</a><a class="mobile-menu-link" href="">Services</a></div>
+				<div class="mobile-menu-dd">
+                    <?php
+                        $menuParameters = [
+                            'theme_location'  => '',
+                            'menu'            => 'sub-menu',
+                            'container'       => false,
+                            'container_class' => '',
+                            'container_id'    => '',
+                            'menu_class'      => '',
+                            'menu_id'         => '',
+                            'echo'            => false,
+                            'fallback_cb'     => 'wp_page_menu',
+                            'before'          => '',
+                            'after'           => '',
+                            'link_before'     => '',
+                            'link_after'      => '',
+                            'items_wrap'      => '%3$s',
+                            'depth'           => 0,
+                            'walker'          => '',
+                            'link_class'      => 'mobile-menu-link',
+                        ];
+
+                        echo strip_tags(wp_nav_menu( $menuParameters ), '<a>' );
+                    ?>
+                </div>
 			</button>
-            <a class="mobile-menu-link" href="">Partners</a>
-            <a class="mobile-menu-link" href="">Industries</a>
-            <a class="mobile-menu-link" href="<?= get_home_url(); ?>/price">Pricing</a>
-            <a class="mobile-menu-link" href="<?= get_home_url(); ?>/blog">Blog</a>
+            <?php
+                $menuParameters = [
+                    'theme_location'  => '',
+                    'menu'            => 'top',
+                    'container'       => false,
+                    'container_class' => '',
+                    'container_id'    => '',
+                    'menu_class'      => '',
+                    'menu_id'         => '',
+                    'echo'            => false,
+                    'fallback_cb'     => 'wp_page_menu',
+                    'before'          => '',
+                    'after'           => '',
+                    'link_before'     => '',
+                    'link_after'      => '',
+                    'items_wrap'      => '%3$s',
+                    'depth'           => 0,
+                    'walker'          => '',
+                    'link_class'      => 'mobile-menu-link',
+                ];
+
+                echo strip_tags(wp_nav_menu( $menuParameters ), '<a>' );
+            ?>
 		</div>
 	</div>
 	<div class="wrapper">

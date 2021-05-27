@@ -50,13 +50,15 @@
                         <div class="post-tag">
                             <?php
                                 $tags = get_the_tags();
-                                foreach ( $tags as $tag ) {
-                                    ?>
+                                if ($tags):
+                                    foreach ( $tags as $tag ) {
+                                        ?>
 
-                                    <span class="btn-blue post-tag-link"><?= $tag->name ?></span>
+                                        <span class="btn-blue post-tag-link"><?= $tag->name ?></span>
 
-                                    <?php
-                                }
+                                        <?php
+                                    }
+                                endif;
                             ?>
                         </div>
                         <div class="post-footer">
@@ -74,6 +76,8 @@
                     <div class="post-popular-heading">Popular articles</div>
                     <div class="post-popular-wrap">
 	                    <?php
+                            $orig_post = $post;
+                            global $post;
 		                    $popularpost = new WP_Query( array( 'posts_per_page' => 4, 'meta_key' => 'wpb_post_views_count', 'orderby' => 'meta_value_num', 'order' => 'DESC'  ) );
 		                    while ( $popularpost->have_posts() ) :
 			                    $popularpost->the_post();
@@ -93,69 +97,78 @@
 
 		                        <?php
 		                    endwhile;
+
+                            $post = $orig_post;
+                            wp_reset_query();
 	                    ?>
                     </div>
                 </aside>
             </div>
-            <section class="article-slider container"><img class="article-slider-bg-one" src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-bg-1.svg" alt=""><img class="article-slider-bg-two" src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-bg-2.svg" alt=""><img class="article-slider-bg-three" src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-bg-3.svg" alt="">
-                <div class="article-slider-head">
-                    <div class="article-slider-head-wrap">
-                        <div class="info-wrap-heading big">Related stories</div>
-                        <div class="slider-button-wrap article-slider-btn">
-                            <button class="slider-button slider-button-prev article-prev">
-                                <svg class="slider-button-icon">
-                                    <use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#arrow-s-l"></use>
-                                </svg>
-                            </button>
-                            <button class="slider-button slider-button-next article-next">
-                                <svg class="slider-button-icon">
-                                    <use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#arrow-s-r"></use>
-                                </svg>
-                            </button>
+            <?php
+                $orig_post = $post;
+                global $post;
+                $tags = wp_get_post_tags(get_the_ID());
+                if ($tags) {
+                    $tag_ids = array();
+            ?>
+                <section class="article-slider container"><img class="article-slider-bg-one" src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-bg-1.svg" alt=""><img class="article-slider-bg-two" src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-bg-2.svg" alt=""><img class="article-slider-bg-three" src="<?php bloginfo('template_url'); ?>/assets/img/content/article/article-bg-3.svg" alt="">
+                    <div class="article-slider-head">
+                        <div class="article-slider-head-wrap">
+                            <div class="info-wrap-heading big">Related stories</div>
+                            <div class="slider-button-wrap article-slider-btn">
+                                <button class="slider-button slider-button-prev article-prev">
+                                    <svg class="slider-button-icon">
+                                        <use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#arrow-s-l"></use>
+                                    </svg>
+                                </button>
+                                <button class="slider-button slider-button-next article-next">
+                                    <svg class="slider-button-icon">
+                                        <use href="<?php bloginfo('template_url'); ?>/assets/img/svg/symbol/sprite.svg#arrow-s-r"></use>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="article-slider-wrap">
-                    <?php
-                        $orig_post = $post;
-                        global $post;
-                        $tags = wp_get_post_tags(get_the_ID());
-                        if ($tags) {
-                            $tag_ids = array();
-                            foreach($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
-                            $args=array(
-                                'tag__in' => $tag_ids,
-                                'post__not_in' => array(get_the_ID()),
-                                'posts_per_page' => 10, // Number of related posts that will be shown.
-                                'ignore_sticky_posts' => 1
-                            );
-                            $my_query = new wp_query( $args );
-                            if( $my_query->have_posts() ) {
-                                while( $my_query->have_posts() ) {
-                                    $my_query->the_post(); ?>
+                    <div class="article-slider-wrap">
+                        <?php
+                            foreach($tags as $individual_tag)
+                                $tag_ids[] = $individual_tag->term_id;
+                                $args = array(
+                                    'tag__in' => $tag_ids,
+                                    'post__not_in' => array(get_the_ID()),
+                                    'posts_per_page' => 10, // Number of related posts that will be shown.
+                                    'ignore_sticky_posts' => 1
+                                );
+                                $my_query = new wp_query( $args );
+                                if( $my_query->have_posts() ) {
+                                    while( $my_query->have_posts() ) {
+                                        $my_query->the_post(); ?>
 
-                                    <div class="article-slider-elem">
-                                        <article class="article-elem">
-                                            <a class="article-cover" href="<?= the_permalink() ?>">
-                                                <img src="<?= the_post_thumbnail() ?>" alt="Article">
-                                            </a>
-                                            <div class="article-info">
-                                                <div class="article-tag">Article</div>
-                                                <div class="article-date"><?= strtolower(get_the_date()) ?> <?= the_time() ?></div>
-                                            </div>
-                                            <div class="article-name"><?= the_title() ?></div>
-                                            <a class="read-more article-read-more" href="<?= the_permalink() ?>">Read more</a>
-                                        </article>
-                                    </div>
+                                        <div class="article-slider-elem">
+                                            <article class="article-elem">
+                                                <a class="article-cover" href="<?= the_permalink() ?>">
+                                                    <img src="<?= the_post_thumbnail() ?>" alt="Article">
+                                                </a>
+                                                <div class="article-info">
+                                                    <div class="article-tag">Article</div>
+                                                    <div class="article-date"><?= strtolower(get_the_date()) ?> <?= the_time() ?></div>
+                                                </div>
+                                                <div class="article-name"><?= the_title() ?></div>
+                                                <a class="read-more article-read-more" href="<?= the_permalink() ?>">Read more</a>
+                                            </article>
+                                        </div>
 
-                                <?php }
+                                    <?php
+                                }
                             }
-                        }
-                        $post = $orig_post;
-                        wp_reset_query();
-                    ?>
-                </div>
-            </section>
+                        ?>
+                    </div>
+                </section>
+            <?php
+                    }
+                $post = $orig_post;
+                wp_reset_query();
+            ?>
         </div>
     </main>
 

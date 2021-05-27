@@ -241,6 +241,7 @@ jQuery(document).ready(function () {
         e.preventDefault();
         var $this = jQuery(this);
         var action = jQuery('input[name="action"]').val();
+        var type = jQuery(this).find('input[name="type"]').val();
 
         if (!action) {
             console.log('У формы отсутствует атрибут action, не знаю куда посылать данные');
@@ -252,10 +253,18 @@ jQuery(document).ready(function () {
         if (validation.verificationFields($this)) {
             let keep_me_updated = jQuery('form #demo-checkbox').is(':checked');
             let formData = new FormData();
-            formData.append('Full name', jQuery('form #full_name').val());
-            formData.append('Company name', jQuery('form #company_name').val());
-            formData.append('Business email', jQuery('form #business_email').val());
-            formData.append('Keep me updated', keep_me_updated ? 'yes' : 'no');
+            if (type == 'demo') {
+                formData.append('Form', 'Book Demo');
+                formData.append('Full name', jQuery('form #full_name').val());
+                formData.append('Company name', jQuery('form #company_name').val());
+                formData.append('Business email', jQuery('form #business_email').val());
+                formData.append('Keep me updated', keep_me_updated ? 'yes' : 'no');
+            } else if (type == 'faq') {
+                formData.append('Form', 'FAQ');
+                formData.append('Name', jQuery('form #faq_name').val());
+                formData.append('Your email', jQuery('form #faq_email').val());
+                formData.append('Message', jQuery('form #faq_message').val());
+            }
 
             jQuery.ajax({
                 url: action,
